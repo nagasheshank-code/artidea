@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARTIDEA | Imagine. Develop. Create.</title>
+<style>
+:root{--bg:#101018;--panel:#191925;--panel2:#222233;--ink:#f7f3ff;--muted:#aaa5bb;--line:#343246;--pink:#ff77b7;--gold:#ffc66d;--mint:#8ce4c1;--violet:#a994ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0%,#302344 0,transparent 32%),var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 15px;background:linear-gradient(110deg,var(--pink),var(--gold));color:#201321;font-weight:800}
+button.secondary{background:var(--panel2);color:var(--ink);border:1px solid var(--line)}button.small{padding:7px 10px;font-size:13px}
+header{max-width:1160px;margin:auto;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+.brand{font-size:25px;font-weight:950;letter-spacing:2px}.brand span{color:var(--gold)}.tag{color:var(--muted);font-size:12px;letter-spacing:2px}
+nav{display:flex;gap:8px;flex-wrap:wrap}nav button{background:transparent;color:var(--muted);border:1px solid transparent}nav button.active,nav button:hover{color:var(--ink);border-color:var(--line);background:var(--panel)}
+main{max-width:1160px;margin:auto;padding:16px 24px 60px}.hero{padding:38px 0 30px;display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center}
+.eyebrow{color:var(--mint);font-weight:800;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(38px,6vw,66px);line-height:1.02;margin:12px 0}.hero h1 em{font-style:normal;color:var(--gold)}.hero p{color:var(--muted);max-width:620px;font-size:17px}
+.art-card{min-height:250px;border:1px solid var(--line);border-radius:24px;padding:22px;background:linear-gradient(145deg,#30223d,#1a2830 65%,#3a2a25);position:relative;overflow:hidden}
+.art-card:before{content:"";position:absolute;width:210px;height:210px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--gold));filter:blur(2px);opacity:.8;right:-30px;top:-35px}
+.art-card:after{content:"✦";position:absolute;font-size:140px;color:#fff7;right:95px;bottom:-30px;transform:rotate(15deg)}
+.art-card strong{position:relative;z-index:1;font-size:22px}.art-card p{position:relative;z-index:1;color:#eee;max-width:220px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px}.tab{padding:10px 14px;border:1px solid var(--line);background:var(--panel);border-radius:999px;color:var(--muted)}.tab.active{background:#3a2b49;border-color:#8d6ab4;color:white}
+.section{display:none}.section.active{display:block}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}.card h2,.card h3{margin:0 0 8px}.muted{color:var(--muted)}label{display:block;font-size:13px;color:#d8d2e6;margin:12px 0 6px}
+input,select,textarea{width:100%;padding:12px 13px;border-radius:11px;border:1px solid var(--line);background:#11111a;color:var(--ink);outline:none}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--violet)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.chip{border:1px solid var(--line);background:#171722;color:var(--muted);padding:8px 11px;border-radius:999px;cursor:pointer}.chip.selected{background:#3a2b49;color:white;border-color:var(--violet)}
+.idea{border:1px solid var(--line);background:#151520;border-radius:14px;padding:16px;margin-top:12px}.idea h3{color:var(--gold);margin:0 0 5px}.idea p{margin:6px 0;color:#ddd8e8}.idea .muted{font-size:13px}
+.output{white-space:pre-wrap;background:#11111a;border:1px solid var(--line);border-radius:12px;padding:14px;color:#e7e0f4;margin-top:10px}
+.chat{height:340px;overflow:auto;background:#11111a;border:1px solid var(--line);border-radius:14px;padding:14px}.bubble{max-width:88%;padding:12px 14px;border-radius:14px;margin:9px 0;white-space:pre-wrap}.bot{background:#29243a;border:1px solid #493b61}.user{background:#3c2940;margin-left:auto}.chatbar{display:flex;gap:8px;margin-top:10px}.chatbar input{flex:1}
+.preview{max-width:100%;max-height:250px;display:block;border-radius:12px;margin-top:12px;border:1px solid var(--line)}.empty{color:var(--muted);padding:18px;border:1px dashed var(--line);border-radius:12px;text-align:center}
+footer{max-width:1160px;margin:auto;padding:22px 24px 40px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+@media(max-width:760px){header{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}main{padding:8px 16px 40px}.hero{padding-top:22px}}
+</style>
+</head>
+<body>
+<header>
+ <div><div class="brand">ART<span>IDEA</span></div><div class="tag">IMAGINE · DEVELOP · CREATE</div></div>
+ <nav><button class="active" data-go="home">Home</button><button data-go="ideas">Idea Studio</button><button data-go="space">My Creative Space</button><button data-go="mentor">AI Art Mentor</button></nav>
+</header>
+<main>
+<section id="home" class="section active">
+ <div class="hero">
+  <div><div class="eyebrow">YOUR CREATIVE COMPETITION COMPANION</div><h1>Big ideas begin with a <em>blank page.</em></h1><p>Find fresh drawing concepts, explore art mediums, develop your own sketches and shape your idea with a step-by-step creative mentor.</p><button onclick="go('ideas')">Explore poster ideas ↗</button></div>
+  <div class="art-card"><strong>ARTIDEA</strong><p>Not here to draw for you. Here to help your creativity go further.</p></div>
+ </div>
+ <div class="grid">
+  <div class="card"><h2>💡 Idea Studio</h2><p class="muted">Start with a competition topic and discover original visual concepts.</p><button class="secondary" onclick="go('ideas')">Generate concepts</button></div>
+  <div class="card"><h2>🖍️ My Creative Space</h2><p class="muted">Save your own ideas, upload sketches and keep track of improvements.</p><button class="secondary" onclick="go('space')">Open my space</button></div>
+  <div class="card"><h2>🤖 AI Art Mentor</h2><p class="muted">Talk through your idea and get practical suggestions for developing it.</p><button class="secondary" onclick="go('mentor')">Meet your mentor</button></div>
+  <div class="card"><h2>🎨 MediumMatch</h2><p class="muted">Explore suitable materials and techniques for the artwork you want to create.</p><button class="secondary" onclick="go('ideas')">Find a medium</button></div>
+ </div>
+</section>
+
+<section id="ideas" class="section">
+ <div class="eyebrow">01 / IDEA STUDIO</div><h1>Find your next big concept.</h1><p class="muted">Choose a topic, category and medium. These starter concepts are examples; you can adapt them to your own style.</p>
+ <div class="grid">
+  <div class="card">
+   <label>Competition topic</label><input id="topic" placeholder="e.g. Save Water, Healthy Earth, Unity in Diversity">
+   <label>Category</label><select id="category"><option>Environment</option><option>Social awareness</option><option>Science & technology</option><option>Culture & heritage</option><option>Health & wellbeing</option><option>Open theme</option></select>
+   <label>Preferred art medium</label><select id="medium"><option>Recommend a medium</option><option>Poster colours</option><option>Acrylic painting</option><option>Watercolour</option><option>Oil pastels</option><option>Colour pencils</option><option>Mixed media</option><option>Paper collage</option><option>Digital illustration</option></select>
+   <label>Difficulty</label><select id="level"><option>Intermediate</option><option>Beginner</option><option>Advanced</option></select>
+   <button onclick="generateIdeas()">Generate creative concepts</button>
+  </div>
+  <div class="card"><h2>🎨 MediumMatch</h2><p class="muted">A medium is a creative choice, not a rule. Try these starting points:</p>
+   <div class="idea"><h3>Poster colours</h3><p>Bold flat areas, clear contrast and readable shapes.</p></div>
+   <div class="idea"><h3>Oil pastels</h3><p>Rich colour blending, texture and expressive highlights.</p></div>
+   <div class="idea"><h3>Mixed media</h3><p>Combine drawing, paint, textured paper and collage.</p></div>
+   <div class="idea"><h3>Watercolour</h3><p>Transparent washes, soft transitions and atmospheric effects.</p></div>
+  </div>
+ </div>
+ <div id="ideasOut"></div>
+</section>
+
+<section id="space" class="section">
+ <div class="eyebrow">02 / MY CREATIVE SPACE</div><h1>Your ideas. Your art journey.</h1><p class="muted">Keep your own concepts and sketches together in this browser.</p>
+ <div class="grid">
+  <div class="card"><h2>✍️ Save your idea</h2>
+   <label>Idea title</label><input id="ownTitle" placeholder="Give your concept a name">
+   <label>Describe your idea</label><textarea id="ownText" placeholder="Describe the scene, symbols, message or layout you have in mind..."></textarea>
+   <button onclick="saveIdea()">Save to my space</button>
+  </div>
+  <div class="card"><h2>🖼️ Upload a sketch</h2><p class="muted">Choose a photo or image of your rough drawing. It stays in this browser preview and is not sent to a server.</p>
+   <input id="sketch" type="file" accept="image/*" onchange="previewSketch(event)">
+   <img id="sketchPreview" class="preview" alt="Sketch preview" hidden>
+   <label>What would you like feedback on?</label><select id="feedback"><option>Overall concept and clarity</option><option>Composition and balance</option><option>Colour choices</option><option>Visual storytelling</option><option>Medium and technique</option></select>
+   <button class="secondary" onclick="sendSketchToMentor()">Discuss this sketch with mentor</button>
+  </div>
+ </div>
+ <div class="card"><h2>⭐ Saved ideas</h2><div id="savedList" class="empty">Your saved ideas will appear here.</div></div>
+</section>
+
+<section id="mentor" class="section">
+ <div class="eyebrow">03 / AI ART MENTOR</div><h1>Let's develop your idea.</h1><p class="muted">Describe your concept, or bring a saved idea. The mentor demo will help you think through improvements.</p>
+ <div class="card">
+  <div class="chat" id="chat"><div class="bubble bot">Hi, I'm your ARTIDEA creative mentor. 🌟\n\nTell me your competition topic and your idea. I'll help you explore visual storytelling, composition, colour, medium and practical next steps. Your idea stays yours!</div></div>
+  <div class="chatbar"><input id="chatInput" placeholder="Tell me about your idea..." onkeydown="if(event.key==='Enter')sendChat()"><button onclick="sendChat()">Send</button></div>
+  <p class="muted" style="font-size:12px">Prototype note: this is a guided demo, not a live AI connection yet. A secure AI service can be connected in the next development stage.</p>
+ </div>
+ <div class="card"><h2>Mentor checklist</h2><div class="grid"><div>✦ Is the message clear?</div><div>✦ Is there one strong focal point?</div><div>✦ Does the layout guide the eye?</div><div>✦ Do colours support the mood?</div><div>✦ Can your chosen medium achieve it?</div><div>✦ Is the concept your own?</div></div></div>
+</section>
+</main>
+<footer>ARTIDEA · A creative companion for hand-drawn poster and art competitions. This prototype stores saved text locally in your browser. It does not promise competition results or first prize.</footer>
+<script>
+const $=id=>document.getElementById(id);
+function go(id){document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.go===id));window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function generateIdeas(){
+ const t=$('topic').value.trim()||'Your competition theme',cat=$('category').value,m=$('medium').value,lev=$('level').value;
+ const medium=m==='Recommend a medium'?(cat==='Environment'?'Poster colours or mixed media':'Poster colours or acrylic painting'):m;
+ const templates=[
+  ['The Two Futures','Show the topic as two contrasting worlds meeting in one central object. Use the contrast to tell a story without overcrowding the page.'],
+  ['A Small Detail, A Big Change','Make one everyday object the hero of the poster. Transform it into a symbol of the larger issue. Keep the focal point bold and instantly readable.'],
+  ['The Circle of Consequences','Build a circular composition where each visual element leads to the next. Let the final element connect back to the main symbol.']
+ ];
+ $('ideasOut').innerHTML='<div class="card"><h2>Concepts for: '+escapeHtml(t)+'</h2><p class="muted">'+escapeHtml(cat)+' · '+escapeHtml(lev)+' · Suggested medium: '+escapeHtml(medium)+'</p>'+templates.map((x,i)=>'<div class="idea"><h3>'+String(i+1).padStart(2,'0')+' · '+x[0]+'</h3><p>'+x[1]+'</p><p class="muted"><b>Try this medium:</b> '+escapeHtml(medium)+'. '+(lev==='Beginner'?'Keep shapes simple and focus on one clear message.':lev==='Advanced'?'Experiment with layered symbolism, texture and controlled detail.':'Balance a strong focal point with supporting details.')+'</p><button class="small secondary" onclick="saveGenerated('+i+')">Save concept</button> <button class="small" onclick="promptFor('+i+')">Create image prompt</button></div>').join('')+'</div>';
+ window.generated={t,cat,medium,lev,templates};}
+function saveGenerated(i){let g=window.generated;if(!g)return;saveToStore(g.templates[i][0]+' · '+g.t,g.templates[i][1]+' Category: '+g.cat+'. Medium: '+g.medium+'. Difficulty: '+g.lev);alert('Concept saved to My Creative Space.');}
+function promptFor(i){let g=window.generated,x=g.templates[i];let p='Create a portrait-format hand-drawn poster reference for the competition topic "'+g.t+'". Concept: '+x[0]+'. '+x[1]+' Suggested medium: '+g.medium+'. Category: '+g.cat+'. Difficulty: '+g.lev+'. Make the composition clear, original, visually powerful and achievable as a drawing competition artwork. Avoid tiny unreadable text; leave room for the artist to add their own slogan.';addBubble('bot','Image prompt to copy:\\n\\n'+p);go('mentor');}
+function getSaved(){try{return JSON.parse(localStorage.getItem('artidea_saved')||'[]')}catch(e){return []}}
+function saveToStore(title,desc){let a=getSaved();a.unshift({title,desc});localStorage.setItem('artidea_saved',JSON.stringify(a.slice(0,40)));renderSaved();}
+function saveIdea(){let t=$('ownTitle').value.trim(),d=$('ownText').value.trim();if(!t||!d){alert('Please add a title and describe your idea first.');return;}saveToStore(t,d);$('ownTitle').value='';$('ownText').value='';}
+function renderSaved(){let a=getSaved();$('savedList').className=a.length?'':'empty';$('savedList').innerHTML=a.length?a.map((x,i)=>'<div class="idea"><h3>'+escapeHtml(x.title)+'</h3><p>'+escapeHtml(x.desc)+'</p><button class="small secondary" onclick="useSaved('+i+')">Develop with mentor</button> <button class="small secondary" onclick="deleteSaved('+i+')">Delete</button></div>').join(''):'Your saved ideas will appear here.';}
+function useSaved(i){let x=getSaved()[i];go('mentor');addBubble('user','I want to develop this saved idea: '+x.title+'\\n'+x.desc);mentorReply(x.desc);}
+function deleteSaved(i){let a=getSaved();a.splice(i,1);localStorage.setItem('artidea_saved',JSON.stringify(a));renderSaved();}
+function previewSketch(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{$('sketchPreview').src=r.result;$('sketchPreview').hidden=false;};r.readAsDataURL(f);}
+function sendSketchToMentor(){if(!$('sketch').files.length){alert('Upload a sketch first.');return;}go('mentor');addBubble('user','I uploaded a sketch and want feedback on: '+$('feedback').value+'. Please help me review the concept.');addBubble('bot','I can help you structure a review. In this prototype, I cannot actually inspect the uploaded image yet. When live image analysis is connected, I can review the sketch itself. For now, describe what you drew and what feels unfinished, and we can work through it together.');}
+function addBubble(who,text){let d=document.createElement('div');d.className='bubble '+who;d.textContent=text;$('chat').appendChild(d);$('chat').scrollTop=$('chat').scrollHeight;}
+function mentorReply(text){let l=text.toLowerCase();let reply='Let’s strengthen this while keeping your original idea.\\n\\n1. Main message: In one sentence, what should a viewer understand?\\n2. Focal point: Choose one dominant image or symbol that communicates that message.\\n3. Composition: Place the focal point where the eye lands first, then use supporting details to guide the viewer.\\n4. Colour: Limit the main palette to a few purposeful colours and use contrast to create emphasis.\\n5. Medium: Choose techniques that suit your materials and time.\\n\\nA useful next step: make three tiny thumbnail layouts before starting the final sheet.\\n\\nTo tailor this, tell me your exact competition topic, chosen medium and sheet size.';
+ if(l.includes('water'))reply='Water is a strong theme for visual storytelling. Try developing one clear symbol rather than filling the sheet with many separate facts. For example, a single drop can contain a thriving landscape while the world outside it appears dry.\\n\\nComposition: make the drop the focal point; use the surrounding space to show the contrast.\\nColour: reserve bright blues and greens for the hopeful area, and use restrained earthy tones elsewhere.\\nMedium: poster colours or acrylic can create bold contrast; watercolour can create softer transitions.\\n\\nNext, decide what emotion you want the viewer to feel: urgency, hope or responsibility. What is your exact idea?';
+ if(l.includes('composition'))reply='For composition, start with a thumbnail sketch. Pick one focal point, arrange supporting elements so they lead the eye toward it, and leave enough negative space for the message. Avoid giving every object equal size or detail. What is the main object in your drawing?';
+ if(l.includes('colour'))reply='For colour planning, choose a small palette: one dominant colour, one supporting colour and one accent. Use contrast to make the focal point stand out, and check that the message remains readable from a short distance. Which mood are you aiming for: hopeful, urgent, peaceful or energetic?';
+ addBubble('bot',reply);}
+function sendChat(){let v=$('chatInput').value.trim();if(!v)return;$('chatInput').value='';addBubble('user',v);mentorReply(v);}
+renderSaved();
+</script>
+</body></html>
